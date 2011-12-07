@@ -1,0 +1,73 @@
+body {
+  font: 10px sans-serif;
+}
+
+.bar rect {
+  fill: steelblue;
+}
+
+text.labels, text.nameLabels, text.valueLabels {
+  fill: white;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path {
+  fill: none;
+}
+
+.x.axis line {
+  stroke: #fff;
+  stroke-opacity: .8;
+}
+
+.y.axis path {
+  stroke: black;
+}
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+.chart rect {
+  stroke: white;
+  fill: steelblue;
+}
+
+.chart text.bar {
+  fill: white;
+}
+
+.chart text.rule {
+  fill: black;
+}
+
+li, .addCard {
+	list-style: none;
+	border: 1px solid gray;
+	background-color: white;
+	height: 300px;
+	width: 240px;
+	margin: 5px;
+	float: left;
+}
+
+
+.remove {
+	float: right;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+	font-size: 16px;
+}
+
+.remove:hover {
+	color: gray;
+}

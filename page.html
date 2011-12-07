@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Campaign Contributions</title>
+    <script type="text/javascript" src="D3/d3.js"></script>
+    <script type="text/javascript" src="D3/d3.csv.js"></script>
+    <script type="text/javascript" src="D3/lib/jquery/jquery.js"></script>
+    <script type="text/javascript" src="D3/lib/jquery-ui/jquery.ui.core.js"></script>
+    <script type="text/javascript" src="D3/lib/jquery-ui/jquery.ui.widget.js"></script>
+    <script type="text/javascript" src="D3/lib/jquery-ui/jquery.ui.mouse.js"></script>
+    <script type="text/javascript" src="D3/lib/jquery-ui/jquery.ui.sortable.js"></script>
+    <script type="text/javascript" src="bargraph.js"></script>
+    <link type="text/css" rel="stylesheet" href="page.css"/>
+  </head>
+  <body>
+    <ul id="cardList">
+    </ul>
+    <form class="addCard">
+      <select id="senators">
+          <option value="sen1">Sen1</option>
+          <option value="sen2">Sen2</option>
+          <option value="sen3">Sen3</option>
+      </select>
+      <input type="button" value="Add senator" onclick="addSenator(this)"/>
+    </form>
+ 
+    <script type="text/javascript" src="opensecrets.js"></script>
+  </body>
+</html>
