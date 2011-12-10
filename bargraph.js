@@ -2,7 +2,7 @@ var chart, x, y;
 var chartWidth = 800;
 var chartHeight = 600;
 var barWidth = 25;
-function drawBarGraph(subjectName, idName, data, labels, numItems, width, height)
+function drawBarGraph(className, idName, data, labels, numItems, width, height)
 {
     data = data.splice(0, numItems);
     labels = labels.splice(0, numItems);
@@ -11,7 +11,7 @@ function drawBarGraph(subjectName, idName, data, labels, numItems, width, height
 
     if(width) chartWidth = width;
     if(height) chartHeight = height;
-    barWidth = chartHeight/(data.length*1.3);
+    barWidth = chartHeight/(data.length*1.2);
     
     var padding = chartHeight - (barWidth * data.length);
     padding /= (data.length*2);
@@ -26,15 +26,13 @@ function drawBarGraph(subjectName, idName, data, labels, numItems, width, height
 		
     chart = d3.select("#" + idName)
         .append("svg:svg")
-            .attr("class","chart")
+            .attr("class",className)
             .attr("width",chartWidth)
             .attr("height",chartHeight)
-        .append("svg:g")
-            .attr("transform", "translate(10,15)");
             
     x = d3.scale.linear()
         .domain([0, d3.max(data)])
-        .range([0,chartWidth - 20]);
+        .range([4,chartWidth - 16]);
     y = d3.scale.ordinal()
         .domain(data)
         .rangeBands([0, barWidth*data.length]);
@@ -60,15 +58,16 @@ function drawBarGraph(subjectName, idName, data, labels, numItems, width, height
     
     chart.selectAll("rect").data(data).enter()
         .append("svg:rect")
-            .attr("y", function(d,i) {return i*barWidth*1.2 + padding;})
+            .attr("x",4)
+            .attr("y", function(d,i) {return i*barWidth*1.2;})
             .attr("width",x)
             .attr("height",barWidth);
             
     chart.selectAll("text.nameLabels").data(data).enter()
         .append("svg:text")
             .attr("class", "nameLabels")
-            .attr("x", 3)
-            .attr("y", function(d, i) {return i*barWidth*1.2 + barWidth/2+padding/2; })
+            .attr("x", 8)
+            .attr("y", function(d, i) {return i*barWidth*1.2 + barWidth/2; })
             .attr("dx", 0)
             .attr("dy", ".5em")
             .text(function(v)
@@ -86,18 +85,20 @@ function drawBarGraph(subjectName, idName, data, labels, numItems, width, height
         .append("svg:text")
             .attr("class", "valueLabels")
             .attr("x", x)
-            .attr("y", function(d, i) {return i*barWidth*1.2 + barWidth/2+padding/2; })
+            .attr("y", function(d, i) {return i*barWidth*1.2 + barWidth/2})
             .attr("dx", -3)
-            .attr("dy", ".5em")
+            .attr("dy", ".48em")
             .attr("text-anchor", "end")
             .text(function(v)
             {
                 return "$" + Math.floor(v/100);
             });
 
-    var lineHeight = chartHeight;
-    if(bigView) lineHeight -= 38;
+    var lineHeight = (numItems-1)*barWidth*1.2+barWidth;
+//    if(bigView) lineHeight -= ;
     chart.append("svg:line")
+        .attr("x1", 4)
+        .attr("x2", 4)
         .attr("y1", 0)
         .attr("y2", lineHeight)
         .attr("stroke", "#000");
@@ -137,3 +138,5 @@ function redraw(data, labels)
             return "$" + Math.floor(v/100);
         });
 }
+
+//function drawBig(
