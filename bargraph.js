@@ -26,6 +26,7 @@ function drawBarGraph(className, idName, data, labels, numItems, width, height)
 		
     chart = d3.select("#" + idName)
         .append("svg:svg")
+            .attr("id", "c" + idName.substring(3))
             .attr("class",className)
             .attr("width",chartWidth)
             .attr("height",chartHeight)
@@ -104,11 +105,13 @@ function drawBarGraph(className, idName, data, labels, numItems, width, height)
         .attr("stroke", "#000");
 }
 
-function redraw(data, labels)
-{
+function redraw(idName, data, labels)
+{    
+    chart = d3.select(idName);
+    
     x = d3.scale.linear()
         .domain([0, d3.max(data)])
-        .range([0,chartWidth - 20]);
+        .range([4,chartWidth - 16]);
             
     chart.selectAll("rect")
         .data(data).transition()
