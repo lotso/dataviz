@@ -28,7 +28,7 @@ text.labels, text.nameLabels, text.valueLabels {
 }
 
 .chart div {
-  font: 10px sans-serif;
+  font-size: 10px sans-serif;
   background-color: steelblue;
   text-align: right;
   padding: 3px;
@@ -38,11 +38,12 @@ text.labels, text.nameLabels, text.valueLabels {
 
 .chart rect {
   stroke: white;
-  fill: steelblue;
+  fill: #8A8A8A;
 }
 
 .chart text.bar {
   fill: white;
+	font-size: 12px;
 }
 
 .chart text.rule {
@@ -54,9 +55,31 @@ li, .addCard {
 	border: 1px solid gray;
 	background-color: white;
 	height: 300px;
-	width: 240px;
+	width: 360px;
 	margin: 5px;
 	float: left;
+}
+
+.senName, .Republican, .Democrat {
+	text-indent: 5px;
+	font-family: "Trebuchet MS", "Lucida Grande" , "Lucida Sans", Arial, sans-serif
+}
+
+.Republican, .Democrat {
+	font-size: 14px;
+}
+
+.senName {
+	font-size: 22px;
+	margin-top: 2px;
+}
+
+.Republican {
+	color: #FC6060;
+}
+
+.Democrat {
+	color: #3D6AFF;
 }
 
 
@@ -66,6 +89,8 @@ li, .addCard {
 	background-color: transparent;
 	cursor: pointer;
 	font-size: 16px;
+	position: relative;
+	top: -43px;
 }
 
 .remove:hover {
