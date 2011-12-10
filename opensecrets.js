@@ -101,7 +101,11 @@ function viewMore(item) {
 	var id = $(item).attr("id");
 	
 	var senator = senators[id];
+	var senatorID = senator.records[0].ID;
+	var senatorString = senator.records[0].crpname;
 	
+	var senatorName = getSenatorName(senatorString);
+	var senatorParty = getSenatorParty(senatorString);
 	var senator = senators[id];
 	var arrLength = getArrayLength(senator);
 	
@@ -113,7 +117,7 @@ function viewMore(item) {
 		organizations[i] = senator.records[i].organization;
 	}
 	
-	$("<div class=\"bigView\" id=\"big" + id + "\">" + "<input type=\"button\" class=\"removeBig\" onClick=\"removeBig(this)\" value=\"heyyyyy\" id=\"bv" + id + "\">" + "</div>").appendTo("body");
+	$("<div class=\"bigView\" id=\"big" + id + "\"><div class=\"senName Big\">" + senatorName + "</div><input type=\"button\" class=\"removeBig\" onClick=\"removeBig(this)\" value=\"heyyyyy\" id=\"bv" + id + "\">" + "</div>").appendTo("body");
 	drawBarGraph("bigChart", "big" + id, totals, organizations, 10 , 500, 400);
 }
 

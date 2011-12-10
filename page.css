@@ -18,6 +18,8 @@ text.labels, text.nameLabels, text.valueLabels {
   fill: none;
 }
 
+
+
 .x.axis line {
   stroke: #fff;
   stroke-opacity: .8;
@@ -36,9 +38,38 @@ text.labels, text.nameLabels, text.valueLabels {
   color: white;
 }
 
-.chart rect {
+.cardChart rect, .bigChart rect {
   stroke: white;
   fill: #8A8A8A;
+}
+
+.bigChart {
+	position: relative;
+	top: -164px;
+	left: 20px;
+}
+
+.viewMore {
+	position: relative;
+	bottom: -227px;
+	border: none;
+	background: transparent;
+	font-family: "Trebuchet MS", "Lucida Grande" , "Lucida Sans", Arial, sans-serif;
+	font-size: 12px;
+	left: -4px;
+	color: #8A8A8A;
+	left: 140px;
+	cursor: pointer;
+}
+
+.viewMore:hover {
+	color: #666;
+}
+
+.removeBig {
+	float: right;
+	position: relative;
+	top: -300px;
 }
 
 .bigView {
@@ -71,7 +102,7 @@ li, .addCard {
 
 .senName, .Republican, .Democrat {
 	text-indent: 5px;
-	font-family: "Trebuchet MS", "Lucida Grande" , "Lucida Sans", Arial, sans-serif
+	font-family: "Trebuchet MS", "Lucida Grande" , "Lucida Sans", Arial, sans-serif;
 }
 
 .Republican, .Democrat {
@@ -91,6 +122,13 @@ li, .addCard {
 	color: #3D6AFF;
 }
 
+.senName.Big {
+	float: left;
+	position: relative;
+	top: -300px;
+	left: 10px;
+}
+
 
 .remove {
 	float: right;
@@ -104,4 +142,8 @@ li, .addCard {
 
 .remove:hover {
 	color: gray;
+}
+
+.Big {
+	font-size: 32px;
 }
