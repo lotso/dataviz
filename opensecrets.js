@@ -13,7 +13,7 @@ function getArrayLength(senator) {
 	return arrLength;
 }
 var drawn = false;
-function updateGraph(idName, senator){
+function updateGraph(idName, senator, senatorID){
 
 
 		var arrLength = getArrayLength(senator);
@@ -26,7 +26,7 @@ function updateGraph(idName, senator){
 			organizations[i] = senator.records[i].organization;
 		}
 		console.log("hello");
-		drawBarGraph("cardChart", idName, totals, organizations, 5, 340, 200);
+		drawBarGraph("cardChart", "sc" + senatorID, idName, totals, organizations, 5, 340, 200);
 }
 
 $("#cardList").sortable();
@@ -97,6 +97,11 @@ function removeBig(item) {
 	$("#big" + $(item).attr("id").substring(2)).remove();
 }
 
+function toggleBigCard(item) {
+	var id = $(item).attr("id");
+	console.log(id);
+}
+
 function viewMore(item) {
 	var id = $(item).attr("id");
 	
@@ -117,8 +122,8 @@ function viewMore(item) {
 		organizations[i] = senator.records[i].organization;
 	}
 	
-	$("<div class=\"bigView\" id=\"big" + id + "\"><div class=\"senName Big\">" + senatorName + "</div><input type=\"button\" class=\"removeBig\" onClick=\"removeBig(this)\" value=\"heyyyyy\" id=\"bv" + id + "\">" + "</div>").appendTo("body");
-	drawBarGraph("bigChart", "big" + id, totals, organizations, 10 , 500, 400);
+	$("<div class=\"bigView\" id=\"big" + id + "\"><div class=\"senName Big\">" + senatorName + "</div> <input type=\"button\" class=\"removeBig\" onClick=\"removeBig(this)\" value=\"heyyyyy\" id=\"bv" + id + "\">" + "<input type=\"button\" class=\"toggleBigCard\" onClick=\"toggleBigCard(this)\" value=\"toggleBig\" id=\"tb" + senatorID + "\">" + "</div>").appendTo("body");
+	drawBarGraph("bigChart", "bc" + senatorID ,"big" + senatorID, totals, organizations, 10 , 500, 400);
 }
 
 var count = 0;
@@ -133,7 +138,7 @@ function createCard(){
 	var senatorParty = getSenatorParty(senatorString);
 	
 	$("<li id=\"sen" + count + "\"><div class=\"senName\">" + senatorName + "</div> <div class=\"" + senatorParty + "\">" + senatorParty + "</div> <input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"x\" id=\"" + count + "\">" + "<input type=\"button\" class=\"viewMore\" onClick=\"viewMore(this)\" value=\"view more\" id=\""  + senatorID + "\">" + "</li>").appendTo("#cardList");
-	updateGraph("sen"+count, senator);
+	updateGraph("sen"+count, senator, senatorID);
 	
 	count++;
 }
