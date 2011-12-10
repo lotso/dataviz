@@ -26,7 +26,7 @@ function updateGraph(idName, senator, senatorID){
 			organizations[i] = senator.records[i].organization;
 		}
 		console.log("hello");
-		drawBarGraph("cardChart", "sc" + senatorID, idName, totals, organizations, 5, 340, 200);
+		drawBarGraph("cardChart", idName, "sc" + senatorID, totals, organizations, 5, 340, 200);
 }
 
 $("#cardList").sortable();
@@ -99,7 +99,18 @@ function removeBig(item) {
 
 function toggleBigCard(item) {
 	var id = $(item).attr("id");
-	console.log(id);
+	var senator = sen3;
+	var arrLength = getArrayLength(senator);
+
+	var totals = new Array(arrLength);
+	var organizations = new Array(arrLength);
+
+	for(var i = 0; i < arrLength; i++) {
+		totals[i] = parseFloat(senator.records[i].totals);
+		organizations[i] = senator.records[i].organization;
+	}
+	
+	redraw(id.substring(2), totals, organizations);
 }
 
 function viewMore(item) {
@@ -123,7 +134,7 @@ function viewMore(item) {
 	}
 	
 	$("<div class=\"bigView\" id=\"big" + id + "\"><div class=\"senName Big\">" + senatorName + "</div> <input type=\"button\" class=\"removeBig\" onClick=\"removeBig(this)\" value=\"heyyyyy\" id=\"bv" + id + "\">" + "<input type=\"button\" class=\"toggleBigCard\" onClick=\"toggleBigCard(this)\" value=\"toggleBig\" id=\"tb" + senatorID + "\">" + "</div>").appendTo("body");
-	drawBarGraph("bigChart", "bc" + senatorID ,"big" + senatorID, totals, organizations, 10 , 500, 400);
+	drawBarGraph("bigChart", "big" + senatorID, "bc" + senatorID , totals, organizations, 10 , 500, 400);
 }
 
 var count = 0;
