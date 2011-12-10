@@ -41,6 +41,15 @@ text.labels, text.nameLabels, text.valueLabels {
   fill: #8A8A8A;
 }
 
+.bigView {
+	width: 600px;
+	height: 600px;
+	position: relative;
+	margin: auto;
+	background-color: white;
+	border: 1px solid gray;
+}
+
 .chart text.bar {
   fill: white;
 	font-size: 12px;
