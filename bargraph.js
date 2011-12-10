@@ -107,8 +107,7 @@ function drawBarGraph(className, bigID, chartID, data, labels, numItems, width, 
 
 function redraw(idName, data, labels)
 {    
-    chart = d3.select(idName);
-    
+    chart = d3.select("#" + idName);
     x = d3.scale.linear()
         .domain([0, d3.max(data)])
         .range([4,chartWidth - 16]);
