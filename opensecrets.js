@@ -109,8 +109,8 @@ function toggleBigCard(item) {
 		totals[i] = parseFloat(senator.records[i].totals);
 		organizations[i] = senator.records[i].organization;
 	}
-	
-	redraw(id.substring(2), totals, organizations);
+	console.log("bc" + id.substring(2));
+	redraw("bc" + id.substring(2), totals, organizations);
 }
 
 function viewMore(item) {
