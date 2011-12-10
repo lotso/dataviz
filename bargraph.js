@@ -2,7 +2,7 @@ var chart, x, y;
 var chartWidth = 800;
 var chartHeight = 600;
 var barWidth = 25;
-function drawBarGraph(className, idName, data, labels, numItems, width, height)
+function drawBarGraph(className, bigID, chartID, data, labels, numItems, width, height)
 {
     data = data.splice(0, numItems);
     labels = labels.splice(0, numItems);
@@ -24,9 +24,9 @@ function drawBarGraph(className, idName, data, labels, numItems, width, height)
     }
 
 		
-    chart = d3.select("#" + idName)
+    chart = d3.select("#" + bigID)
         .append("svg:svg")
-            .attr("id", "c" + idName.substring(3))
+            .attr("id", chartID)
             .attr("class",className)
             .attr("width",chartWidth)
             .attr("height",chartHeight)
