@@ -28,8 +28,7 @@ function drawPieChart(className, bigID, chartID, rawJson, width, height)
     if(height) chartHeight = height;
     barWidth = chartHeight/(data.length*1.2);
 		
-    chart = d3.select("body") //Was using this on sample page, final version should use the next line instead
-    //chart = d3.select("#" + bigID) 
+    chart = d3.select("#" + bigID) 
         .append("svg:svg")
             .data([data])
             .attr("id", chartID)
