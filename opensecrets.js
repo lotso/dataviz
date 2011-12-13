@@ -14,7 +14,7 @@ function addFinanceCard(item) {
 		console.log("finance");
 		$("<li id=\"finance\" class=\"cardList\"><div class=\"indName\">Finance Industry</div> <input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"x\" id=\"remFinance\">" + "<input type=\"button\" class=\"viewMore\" onClick=\"viewMore(this)\" value=\"view more\" id=\"vFinance\">" + "</li>").appendTo("#cardList");
 		//updateGraph("sen"+ senID, senator, senatorID);
-		drawPieChart("cardChart", finance, "scFinance", financeData.Finance, 355, 200);
+		drawPieChart("cardChart", "finance", "scFinance", financeData.Finance, 355, 200);
 	}else if ($(item).attr("id") == "ciHealth") {
 		console.log("health");
 	}else if ($(item).attr("id") == "ciLawyersLobbyists") {
