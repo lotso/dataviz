@@ -113,6 +113,24 @@ function toggleBigCard(item) {
 	redraw("bc" + id.substring(2), totals, organizations);
 }
 
+
+function toggleCard(item) {
+	var id = $(item).attr("id");
+	var senator = sen3;
+	var arrLength = getArrayLength(senator);
+
+	var totals = new Array(arrLength);
+	var organizations = new Array(arrLength);
+
+	for(var i = 0; i < arrLength; i++) {
+		totals[i] = parseFloat(senator.records[i].totals);
+		organizations[i] = senator.records[i].organization;
+	}
+	console.log("sc" + id.substring(2));
+	redraw("sc" + id.substring(2), totals, organizations);
+}
+
+
 function viewMore(item) {
 	var id = $(item).attr("id");
 	
@@ -139,6 +157,18 @@ function viewMore(item) {
 
 var count = 0;
 
+function getCrossDomainJson(url, callback) {
+    $.ajax({
+        url: "http://query.yahooapis.com/v1/public/yql?callback=?",
+        data: {
+            q: 'select * from xml where url="' + url + '"',
+            format: "json"
+        },
+        dataType: "jsonp",
+        success: callback
+    });
+}
+
 function createCard(){
 	
 	var senator = getSenator();
@@ -148,7 +178,7 @@ function createCard(){
 	var senatorName = getSenatorName(senatorString);
 	var senatorParty = getSenatorParty(senatorString);
 	
-	$("<li id=\"sen" + count + "\"><div class=\"senName\">" + senatorName + "</div> <div class=\"" + senatorParty + "\">" + senatorParty + "</div> <input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"x\" id=\"" + count + "\">" + "<input type=\"button\" class=\"viewMore\" onClick=\"viewMore(this)\" value=\"view more\" id=\""  + senatorID + "\">" + "</li>").appendTo("#cardList");
+	$("<li id=\"sen" + count + "\"><div class=\"senName\">" + senatorName + "</div> <div class=\"" + senatorParty + "\">" + senatorParty + "</div> <input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"x\" id=\"" + count + "\">" + "<input type=\"button\" class=\"viewMore\" onClick=\"viewMore(this)\" value=\"view more\" id=\""  + senatorID + "\">" + "<input type=\"button\" class=\"toggleCard\" onClick=\"toggleCard(this)\" value=\"toggleBig\" id=\"ts" + senatorID + "\">" + "</li>").appendTo("#cardList");
 	updateGraph("sen"+count, senator, senatorID);
 	
 	count++;
