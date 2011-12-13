@@ -6,6 +6,31 @@ function addSenatorsToSideBar() {
 	}
 }
 
+function addFinanceCard(item) {
+	
+	
+	
+	if($(item).attr("id") == "ciFinance") {
+		console.log("finance");
+		$("<li id=\"finance\" class=\"cardList\"><div class=\"indName\">Finance Industry</div> <div class=\"" + senatorParty + "\">" + senatorParty + "</div> <div class=\"otherView\" id=\"sv" + senatorID + "\">View By Industry</div> <input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"x\" id=\"rem" + senatorID + "\">" + "<input type=\"button\" class=\"viewMore\" onClick=\"viewMore(this)\" value=\"view more\" id=\""  + senatorID + "\">" + "<input type=\"button\" class=\"toggleCard\" onClick=\"toggleCard(this)\" value=\"toggleBig\" id=\"ts" + senatorID + "\">" + "</li>").appendTo("#cardList");
+		updateGraph("sen"+ senID, senator, senatorID);
+	}else if ($(item).attr("id") == "ciHealth") {
+		console.log("health");
+	}else if ($(item).attr("id") == "ciLawyersLobbyists") {
+		console.log("lawyers");
+	}else if ($(item).attr("id") == "ciOther") {
+		console.log("other");
+	}
+}
+
+function addIndustriesToSideBar() {
+	console.log(financeData);
+	$("#senatorsList").append("<li onClick=\"addFinanceCard(this)\" class=\"senatorBar\" id=\"ciFinance\">Finance Industry</li>");
+	$("#senatorsList").append("<li onClick=\"addFinanceCard(this)\" class=\"senatorBar\" id=\"ciHealth\">Health Industry</li>");
+	$("#senatorsList").append("<li onClick=\"addFinanceCard(this)\" class=\"senatorBar\" id=\"ciLawyersLobbyists\">Lawyers/Lobbyists Industry</li>");
+	$("#senatorsList").append("<li onClick=\"addFinanceCard(this)\" class=\"senatorBar\" id=\"ciOther\">Other Industries</li>");
+}
+
 function createCandContribUrl(senId) {
 	var url = "http://www.opensecrets.org/api/?method=candContrib&cid=" + senId + "&cycle=2010&apikey=1f034a0ada9447c9f2139a3be4514cf9";
 	return url;
@@ -25,6 +50,8 @@ function addCard(item) {
 
 //2010
 //H8NM01174
+
+addIndustriesToSideBar();
 
 addSenatorsToSideBar();
 
@@ -46,7 +73,7 @@ function updateGraph(idName, senator, senatorID){
 			organizations[i] = contributors[i].org_name;
 		}
 		console.log("hello");
-		drawBarGraph("cardChart", idName, "sc" + senatorID, totals, organizations, 5, 340, 200);
+		drawBarGraph("cardChart", idName, "sc" + senatorID, totals, organizations, 5, 355, 200);
 }
 
 $("#cardList").sortable();
@@ -76,6 +103,8 @@ function getSenatorParty(senatorString) {
 
 function remove(item) {
    $("#sen" + $(item).attr("id").substring(3)).remove();
+	$("#sl" + $(item).attr("id").substring(3)).removeClass();
+	$("#sl" + $(item).attr("id").substring(3)).addClass("senatorBar");
 }
 
 function removeBig(item) {
@@ -149,7 +178,7 @@ function viewLess(item) {
 	$("#sc" + senatorID).remove();
 	
 	console.log("attempt");
-	drawBarGraph("cardChart", "sen" + senatorID, "sc" + senatorID, totals, organizations, 5, 340, 200);
+	drawBarGraph("cardChart", "sen" + senatorID, "sc" + senatorID, totals, organizations, 5, 355, 200);
 	$("#" + senatorID).click(function(){
 		console.log("why");
 		viewMore(this);
@@ -206,7 +235,7 @@ function viewMore(item) {
 	// $("#" + senatorID).click(function() {
 	// 	viewLess(this);
 	// });
-	drawBarGraph("cardChart", "sen" + senatorID, "sc" + senatorID, totals, organizations, 10, 340, 400);
+	drawBarGraph("cardChart", "sen" + senatorID, "sc" + senatorID, totals, organizations, 10, 355, 400);
 	//drawBarGraph("bigChart", "sen" + senatorID, "bc" + senatorID , totals, organizations, 10 , 500, 400);
 
 	$("#" + senatorID).removeAttr("onclick", null);
@@ -243,6 +272,21 @@ function getCrossDomainJson(url, callback) {
     });
 }
 
+
+function viewByIndustry(item) {
+	var senatorID = $(item).attr("id").substring(2);
+	console.log(iN00007653);
+	var labels = new Array();
+	var totals = new Array();
+	$("#sv" + senatorID).text("View By Employer");
+	for(var i = 0; i < 10; i++) {
+		labels[i] = iN00007653.records[i].indus;
+		totals[i] = parseFloat(iN00007653.records[i].totals);
+		
+	}
+	redraw("sc" + senatorID, totals, labels);
+}
+
 function createCard(senObj, senID){
 	
 	var senator = senObj;
@@ -252,11 +296,13 @@ function createCard(senObj, senID){
 	var senatorString = senator.query.results.response.contributors.cand_name;
 	var senatorName = getSenatorName(senatorString);
 	var senatorParty = getSenatorParty(senatorString);
+	$("#sl" + senatorID).addClass("selected" + senatorParty);
+	$("<li id=\"sen" + senID + "\" class=\"cardList\"><div class=\"senName\">" + senatorName + "</div> <div class=\"" + senatorParty + "\">" + senatorParty + "</div> <div class=\"otherView\" id=\"sv" + senatorID + "\">View By Industry</div> <input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"x\" id=\"rem" + senatorID + "\">" + "<input type=\"button\" class=\"viewMore\" onClick=\"viewMore(this)\" value=\"view more\" id=\""  + senatorID + "\">" + "<input type=\"button\" class=\"toggleCard\" onClick=\"toggleCard(this)\" value=\"toggleBig\" id=\"ts" + senatorID + "\">" + "</li>").appendTo("#cardList");
+	$("#sv" + senatorID).click(function(){
+		viewByIndustry(this);
+	});
 	
-	$("<li id=\"sen" + senID + "\" class=\"cardList\"><div class=\"senName\">" + senatorName + "</div> <div class=\"" + senatorParty + "\">" + senatorParty + "</div> <input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"x\" id=\"rem" + senatorID + "\">" + "<input type=\"button\" class=\"viewMore\" onClick=\"viewMore(this)\" value=\"view more\" id=\""  + senatorID + "\">" + "<input type=\"button\" class=\"toggleCard\" onClick=\"toggleCard(this)\" value=\"toggleBig\" id=\"ts" + senatorID + "\">" + "</li>").appendTo("#cardList");
 	updateGraph("sen"+ senID, senator, senatorID);
-	
-	count++;
 }
 
 console.log(senatorsObj);

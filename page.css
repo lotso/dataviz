@@ -3,7 +3,8 @@ html {
 }
 
 body {
-  font: 10px sans-serif;
+  font-size: 10px;
+	font-family: "Trebuchet MS", "Lucida Grande" , "Lucida Sans", Arial, sans-serif;
 	height: 100%;
 	width: 960px;
 	margin: auto;
@@ -47,6 +48,10 @@ text.labels, text.nameLabels, text.valueLabels {
   color: white;
 }
 
+.cardChart {
+	margin-top: -16px;
+}
+
 .cardChart rect, .bigChart rect {
   stroke: white;
   fill: #8A8A8A;
@@ -60,7 +65,7 @@ text.labels, text.nameLabels, text.valueLabels {
 
 .viewMore {
 	position: relative;
-	bottom: -227px;
+	bottom: -211px;
 	border: none;
 	background: transparent;
 	font-family: "Trebuchet MS", "Lucida Grande" , "Lucida Sans", Arial, sans-serif;
@@ -69,6 +74,11 @@ text.labels, text.nameLabels, text.valueLabels {
 	color: #8A8A8A;
 	left: 140px;
 	cursor: pointer;
+}
+
+.otherView {
+	text-indent: 6px;
+	margin-top: 5px;
 }
 
 .viewMore:hover {
@@ -83,6 +93,10 @@ text.labels, text.nameLabels, text.valueLabels {
 	margin-left: 290px;
 }
 
+.topBar {
+	height: 60px;
+}
+
 .removeBig:hover {
 	color: #666;
 }
@@ -92,6 +106,15 @@ text.labels, text.nameLabels, text.valueLabels {
 	margin-left: -134px;
 	top: 518px;
 	text-decoration: none;
+}
+
+.senateView {
+	text-align: center;
+	margin-top: 10px;
+}
+
+.senateView span {
+	font-size: 44px;
 }
 
 .openSecretsLink {
@@ -136,7 +159,7 @@ text.labels, text.nameLabels, text.valueLabels {
 }
 
 .Republican, .Democrat {
-	font-size: 14px;
+	font-size: 16px;
 }
 
 .toggleCard {
@@ -144,7 +167,7 @@ text.labels, text.nameLabels, text.valueLabels {
 }
 
 .senName {
-	font-size: 22px;
+	font-size: 24px;
 	margin-top: 2px;
 }
 
@@ -167,7 +190,7 @@ text.labels, text.nameLabels, text.valueLabels {
 	cursor: pointer;
 	font-size: 16px;
 	position: relative;
-	top: -43px;
+	top: -65px;
 }
 
 .remove:hover {
@@ -187,7 +210,7 @@ text.labels, text.nameLabels, text.valueLabels {
 }
 
 .textExpanded {
-	bottom: -427px;
+	bottom: -409px;
 }
 
 .nameContainer {
@@ -200,12 +223,21 @@ text.labels, text.nameLabels, text.valueLabels {
 	display: block;
 	cursor: pointer;
 	font-size: 12px;
-	margin: 3px;
-	border-bottom: 1px solid #eee;
+	min-height: 20px;
+	padding-top: 4px;
+	text-indent: 2px;
 }
 
 .Expanded {
 	height: 500px;
+}
+
+.selectedDemocrat {
+	background-color: #3D6AFF;
+}
+
+.selectedRepublican {
+	background-color: #FC6060;
 }
 
 .senatorBar:hover {
