@@ -1,0 +1,159 @@
+body {
+  font: 10px sans-serif;
+}
+
+.bar rect {
+  fill: steelblue;
+}
+
+.bar rectD {
+  fill: blue;
+}
+
+.bar rectR {
+  fill: red;
+}
+
+text.labels, text.nameLabels, text.valueLabels {
+  fill: white;
+}
+
+.axis {
+  shape-rendering: crispEdges;
+}
+
+.axis path {
+  fill: none;
+}
+
+
+
+.x.axis line {
+  stroke: #fff;
+  stroke-opacity: .8;
+}
+
+.y.axis path {
+  stroke: black;
+}
+
+.chart div {
+  font-size: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+
+.cardChart rect, .bigChart rect {
+  stroke: white;
+  fill: #8A8A8A;
+}
+
+.bigChart {
+	position: relative;
+	top: -164px;
+	left: 20px;
+}
+
+.viewMore {
+	position: relative;
+	bottom: -227px;
+	border: none;
+	background: transparent;
+	font-family: "Trebuchet MS", "Lucida Grande" , "Lucida Sans", Arial, sans-serif;
+	font-size: 12px;
+	left: -4px;
+	color: #8A8A8A;
+	left: 140px;
+	cursor: pointer;
+}
+
+.viewMore:hover {
+	color: #666;
+}
+
+.removeBig {
+	float: right;
+	position: relative;
+	top: -300px;
+}
+
+.bigView {
+	width: 600px;
+	height: 600px;
+	position: relative;
+	margin: auto;
+	background-color: white;
+	border: 1px solid gray;
+}
+
+.chart text.bar {
+  fill: white;
+	font-size: 12px;
+}
+
+.chart text.rule {
+  fill: black;
+}
+
+li, .addCard {
+	list-style: none;
+	border: 1px solid gray;
+	background-color: white;
+	height: 300px;
+	width: 360px;
+	margin: 5px;
+	float: left;
+}
+
+.senName, .Republican, .Democrat {
+	text-indent: 5px;
+	font-family: "Trebuchet MS", "Lucida Grande" , "Lucida Sans", Arial, sans-serif;
+}
+
+.Republican, .Democrat {
+	font-size: 14px;
+}
+
+.senName {
+	font-size: 22px;
+	margin-top: 2px;
+}
+
+.Republican {
+    fill: red
+	color: #FC6060;
+}
+
+.Democrat {
+    fill: blue
+	color: #3D6AFF;
+}
+
+.senName.Big {
+	float: left;
+	position: relative;
+	top: -300px;
+	left: 10px;
+}
+
+
+.remove {
+	float: right;
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+	font-size: 16px;
+	position: relative;
+	top: -43px;
+}
+
+.remove:hover {
+	color: gray;
+}
+
+.Big {
+	font-size: 32px;
+}
