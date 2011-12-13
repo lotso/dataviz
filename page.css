@@ -5,6 +5,8 @@ html {
 body {
   font: 10px sans-serif;
 	height: 100%;
+	width: 960px;
+	margin: auto;
 }
 
 
@@ -52,7 +54,7 @@ text.labels, text.nameLabels, text.valueLabels {
 
 .bigChart {
 	position: relative;
-	top: -164px;
+	top: -194px;
 	left: 20px;
 }
 
@@ -74,9 +76,26 @@ text.labels, text.nameLabels, text.valueLabels {
 }
 
 .removeBig {
-	float: right;
+	border: none;
+	background: transparent;
+	font-size: 20px;
+	cursor: pointer;
+	margin-left: 290px;
+}
+
+.removeBig:hover {
+	color: #666;
+}
+
+.openSecretsLink {
 	position: relative;
-	top: -300px;
+	margin-left: -134px;
+	top: 518px;
+	text-decoration: none;
+}
+
+.openSecretsLink {
+	text-decoration: underline;
 }
 
 .bigView {
@@ -107,6 +126,10 @@ text.labels, text.nameLabels, text.valueLabels {
 	float: left;
 }
 
+.toggleBigCard {
+	display: none;
+}
+
 .senName, .Republican, .Democrat {
 	text-indent: 5px;
 	font-family: "Trebuchet MS", "Lucida Grande" , "Lucida Sans", Arial, sans-serif;
@@ -134,12 +157,8 @@ text.labels, text.nameLabels, text.valueLabels {
 }
 
 .senName.Big {
-	float: left;
-	position: relative;
-	top: -300px;
-	left: 10px;
+	/*float: left;*/
 }
-
 
 .remove {
 	float: right;
@@ -156,7 +175,25 @@ text.labels, text.nameLabels, text.valueLabels {
 }
 
 .Big {
+	font-size: 44px;
+}
+
+.Medium {
 	font-size: 32px;
+}
+
+.Democrat.Medium, .Republican.Medium {
+	float: left;
+}
+
+.textExpanded {
+	bottom: -427px;
+}
+
+.nameContainer {
+	float: left;
+	margin-top: -315px;
+	margin-left: 14px;
 }
 
 .senatorBar {
@@ -165,6 +202,10 @@ text.labels, text.nameLabels, text.valueLabels {
 	font-size: 12px;
 	margin: 3px;
 	border-bottom: 1px solid #eee;
+}
+
+.Expanded {
+	height: 500px;
 }
 
 .senatorBar:hover {
@@ -181,6 +222,9 @@ text.labels, text.nameLabels, text.valueLabels {
 
 .cards {
 	float: left;
+	width: 808px;
+	height: 100%;
+	overflow-y: scroll;
 }
 
 #senatorsList {
