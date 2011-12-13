@@ -79,7 +79,7 @@ function drawStackedBarGraph(className, bigID, chartID, rawJson, width, height)
                 return "$" + numberWithCommas(v);
             });
     }
-    
+
     if(0) //Aggregate
     {
         chart.selectAll("rect").data(totals).enter()
