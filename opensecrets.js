@@ -12,8 +12,9 @@ function addFinanceCard(item) {
 	
 	if($(item).attr("id") == "ciFinance") {
 		console.log("finance");
-		$("<li id=\"finance\" class=\"cardList\"><div class=\"indName\">Finance Industry</div> <div class=\"" + senatorParty + "\">" + senatorParty + "</div> <div class=\"otherView\" id=\"sv" + senatorID + "\">View By Industry</div> <input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"x\" id=\"rem" + senatorID + "\">" + "<input type=\"button\" class=\"viewMore\" onClick=\"viewMore(this)\" value=\"view more\" id=\""  + senatorID + "\">" + "<input type=\"button\" class=\"toggleCard\" onClick=\"toggleCard(this)\" value=\"toggleBig\" id=\"ts" + senatorID + "\">" + "</li>").appendTo("#cardList");
-		updateGraph("sen"+ senID, senator, senatorID);
+		$("<li id=\"finance\" class=\"cardList\"><div class=\"indName\">Finance Industry</div> <input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"x\" id=\"remFinance\">" + "<input type=\"button\" class=\"viewMore\" onClick=\"viewMore(this)\" value=\"view more\" id=\"vFinance\">" + "</li>").appendTo("#cardList");
+		//updateGraph("sen"+ senID, senator, senatorID);
+		drawPieChart("cardChart", finance, "scFinance", financeData.Finance, 355, 200);
 	}else if ($(item).attr("id") == "ciHealth") {
 		console.log("health");
 	}else if ($(item).attr("id") == "ciLawyersLobbyists") {
