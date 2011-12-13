@@ -50,6 +50,7 @@ text.labels, text.nameLabels, text.valueLabels {
 
 .cardChart {
 	margin-top: -16px;
+	margin-left: 5px;
 }
 
 .cardChart rect, .bigChart rect {
@@ -290,4 +291,26 @@ text.labels, text.nameLabels, text.valueLabels {
 
 .Ind {
 	top: -30px;
+}
+
+.cardChart .stackRep {
+	fill: #FC6060;
+}
+
+.cardChart .stackDem {
+	fill: #3D6AFF;
+}
+
+.largeCard {
+	width: 730px;
+	height: 680px;
+}
+
+.indentMore {
+	margin-left: 12px;
+}
+
+.iExtended {
+	bottom: -628px;
+	left: 314px;
 }

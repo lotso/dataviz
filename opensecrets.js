@@ -14,17 +14,28 @@ function viewMoreIndustry(item) {
 	var industry = $(item).attr("id").substring(1);
 	if(industry == "Finance") {
 		$("#scFinance").hide();
+		$("#finance").addClass("largeCard");
+		$("#vFinance").addClass("iExtended");
 		drawStackedBarGraph("cardChart", "finance", "cfinance", financeData.Finance, 710, 600);
 	}else if (industry == "Lawyers") {
 		$("#scLawyers").hide();
+		$("#lawyers").addClass("largeCard");
+		$("#vLawyers").addClass("iExtended");
 		drawStackedBarGraph("cardChart", "lawyers", "clawyers", financeData.LawyersLobbyists, 710, 600);
 	}else if (industry == "Health") {
-		$("#scFinance").hide();
+		$("#scHealth").hide();
+		$("#health").addClass("largeCard");
+		$("#vHealth").addClass("iExtended");
 		drawStackedBarGraph("cardChart", "health", "chealth", financeData.Health, 710, 600);
 	}else if (industry == "Others") {
-		$("#scFinance").hide();
-		drawStackedBarGraph("cardChart", "others", "cothers", financeData.Others, 710, 600);
+		$("#scOthers").hide();
+		$("#others").addClass("largeCard");
+		$("#vOthers").addClass("iExtended");
+		drawStackedBarGraph("cardChart", "others", "cothers", financeData.Other, 710, 600);
 	}
+	
+	
+	
 	//drawStackedBarGraph(className, bigID, chartID, rawJson, width, height)
 	
 	// console.log(id);
