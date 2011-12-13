@@ -2,15 +2,24 @@ var chart, x, y;
 var chartWidth = 800;
 var chartHeight = 600;
 var barWidth = 25;
-function drawPieChart(className, bigID, chartID, data, labels, numItems, width, height)
+function drawPieChart(className, bigID, chartID, rawJson, width, height)
 {
-//    data = data.splice(0, numItems);
- //   labels = labels.splice(0, numItems);
-    data = [20, 10, 15, 30, 25];
-    labels = ["Aasdf", "asB", "C", "D", "E"];
-    data = [{"label":"one", "value":20}, 
-            {"label":"two", "value":50}, 
-            {"label":"three", "value":50}];
+    //Pass data as the top level arrays in the large JSon shit I sent
+    //IE, pass "ALLJSON.Finance" as rawJson
+    
+    var arrLength = rawJson.length;
+    var data = new Array(2);
+    var dictDems = {"label":"Democrats", "value":0};
+    var dictReps = {"label":"Republicans", "value":0};
+    
+    for(var i = 0; i < arrLength; i++)
+    {
+        dictDems.value += rawJson[i].democrat;
+        dictReps.value += rawJson[i].republican;
+    }
+    
+    data[0] = dictDems;
+    data[1] = dictReps;
     
     var r = 100;
     var color = d3.scale.category20c();
@@ -19,7 +28,8 @@ function drawPieChart(className, bigID, chartID, data, labels, numItems, width, 
     if(height) chartHeight = height;
     barWidth = chartHeight/(data.length*1.2);
 		
-    chart = d3.select("body")
+    chart = d3.select("body") //Was using this on sample page, final version should use the next line instead
+    //chart = d3.select("#" + bigID) 
         .append("svg:svg")
             .data([data])
             .attr("id", chartID)

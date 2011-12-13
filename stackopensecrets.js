@@ -35,7 +35,7 @@ function updateGraph(idName, senator, senatorID){
             dems[i] = totals[i] * .3;
             reps[i] = totals[i] * .7;
         }
-		drawStackedBarGraph("cardChart", idName, "sc" + senatorID, dems, reps, totals, organizationsD, organizationsR, 5, 340, 200);
+		drawStackedBarGraph("cardChart", idName, "sc" + senatorID, 0, 340, 200);
 }
 
 $("#cardList").sortable();
