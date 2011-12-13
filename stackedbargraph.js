@@ -151,6 +151,7 @@ function drawStackedBarGraph(className, bigID, chartID, rawJson, width, height)
             .attr("text-anchor", "middle")
             .text(function(v)
             {
+                if(v == 0) return "";
                 return "$" + numberWithCommas(v);
             });
             
@@ -164,6 +165,7 @@ function drawStackedBarGraph(className, bigID, chartID, rawJson, width, height)
             .attr("text-anchor", "middle")
             .text(function(v)
             {
+                if(v == 0) return "";
                 return "$" + numberWithCommas(v);
             }); 
             
