@@ -6,34 +6,44 @@ function addSenatorsToSideBar() {
 	}
 }
 
+function createCandContribUrl(senId) {
+	var url = "http://www.opensecrets.org/api/?method=candContrib&cid=" + senId + "&cycle=2010&apikey=b2f04b41bc14f3ba04c32a3959bcddeb";
+	return url;
+}
 
 function addCard(item) {
-	console.log(item);
+	var senId = $(item).attr("id").substring(2);
+	var getUrl = createCandContribUrl(senId);
+	console.log(getUrl);
+	//getUrl = "http://www.opensecrets.org/api/?method=candIndustry&cid=N00000019&cycle=2006&apikey=b2f04b41bc14f3ba04c32a3959bcddeb"
+	var senObj;
+	
+	getCrossDomainJson(getUrl, function(data) {
+		createCard(data, senId);
+	});
 }
+
+//2010
+//H8NM01174
 
 addSenatorsToSideBar();
 
 function getArrayLength(senator) {
-	var arrLength = senator.records.length;
-
-	if(arrLength > 20){
+	var arrLength = senator.query.results.response.contributors.contributor.length;
+	if(arrLength > 10){
 		arrLength = 20;
 	}
-	
 	return arrLength;
 }
 var drawn = false;
 function updateGraph(idName, senator, senatorID){
-
-
 		var arrLength = getArrayLength(senator);
-
 		var totals = new Array(arrLength);
 		var organizations = new Array(arrLength);
-
+		var contributors = senator.query.results.response.contributors.contributor;
 		for(var i = 0; i < arrLength; i++) {
-			totals[i] = parseFloat(senator.records[i].totals);
-			organizations[i] = senator.records[i].organization;
+			totals[i] = parseFloat(contributors[i].total);
+			organizations[i] = contributors[i].org_name;
 		}
 		console.log("hello");
 		drawBarGraph("cardChart", idName, "sc" + senatorID, totals, organizations, 5, 340, 200);
@@ -62,41 +72,7 @@ function getSenatorParty(senatorString) {
 	return "";
 }
 
-function getSenator() {
-	var senatorName = $("#senators").val();
-	var senator;
-		if(senatorName == "sen1") {
-			console.log("s1");
-			senator = sen1;
-		}else if(senatorName == "sen2") {
-			console.log("s2");
-			senator = sen2;
-		}else if(senatorName == "sen3") {
-			console.log("s3");
-			senator = sen3;
-		}else if(senatorName == "sen3") {
-			console.log("s3");
-			senator = sen3;
-		}else if(senatorName == "sen4") {
-			senator = sen4;
-		}else if(senatorName == "sen5") {
-			senator = sen5;
-		}else if(senatorName == "sen6") {
-			senator = sen6;
-		}else if(senatorName == "sen7") {
-			senator = sen7;
-		}else if(senatorName == "sen8") {
-			senator = sen8;
-		}else if(senatorName == "sen9") {
-			senator = sen9;
-		}else if(senatorName == "sen10") {
-			senator = sen10;
-		}else if(senatorName == "sen11") {
-			senator = sen11;
-		}
-		senators[senator.records[0].ID] = senator;
-		return senator;
-}
+
 
 function remove(item) {
    $("#sen" + $(item).attr("id")).remove();
@@ -140,25 +116,29 @@ function toggleCard(item) {
 	redraw("sc" + id.substring(2), totals, organizations);
 }
 
+getWikiXDomain('http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22http%3A%2F%2Fen.wikipedia.org%2Fwiki%2FDaniel_Akaka%22%0A&format=json&diagnostics=true', function(data) {
+	console.log("shit");
+	console.log(data);
+});
 
 function viewMore(item) {
 	var id = $(item).attr("id");
 	
 	var senator = senators[id];
-	var senatorID = senator.records[0].ID;
-	var senatorString = senator.records[0].crpname;
-	
+	var senatorID = id;
+	console.log(senator);
+	var senatorString = senator.query.results.response.contributors.cand_name;
 	var senatorName = getSenatorName(senatorString);
 	var senatorParty = getSenatorParty(senatorString);
-	var senator = senators[id];
 	var arrLength = getArrayLength(senator);
 	
 	var totals = new Array(arrLength);
 	var organizations = new Array(arrLength);
 	
+	console.log(senator);
 	for(var i = 0; i < arrLength; i++) {
-		totals[i] = parseFloat(senator.records[i].totals);
-		organizations[i] = senator.records[i].organization;
+		totals[i] = parseFloat(senator.query.results.response.contributors.contributor[i].total);
+		organizations[i] = senator.query.results.response.contributors.contributor[i].org_name;
 	}
 	
 	$("<div class=\"bigView\" id=\"big" + id + "\"><div class=\"senName Big\">" + senatorName + "</div> <input type=\"button\" class=\"removeBig\" onClick=\"removeBig(this)\" value=\"heyyyyy\" id=\"bv" + id + "\">" + "<input type=\"button\" class=\"toggleBigCard\" onClick=\"toggleBigCard(this)\" value=\"toggleBig\" id=\"tb" + senatorID + "\">" + "</div>").appendTo("body");
@@ -166,6 +146,19 @@ function viewMore(item) {
 }
 
 var count = 0;
+
+function getWikiXDomain(url, callback) {
+	$.ajax({
+      url: url,
+      data: {
+          q: 'select * from xml where url="' + url + '"',
+          format: "json"
+      },
+      dataType: "jsonp",
+      success: callback
+  });
+}
+
 
 function getCrossDomainJson(url, callback) {
     $.ajax({
@@ -179,12 +172,13 @@ function getCrossDomainJson(url, callback) {
     });
 }
 
-function createCard(){
+function createCard(senObj, senID){
 	
-	var senator = getSenator();
-	var senatorID = senator.records[0].ID;
-	var senatorString = senator.records[0].crpname;
-	
+	var senator = senObj;
+	senators[senID] = senator;
+	var senatorID = senID;
+	console.log(senator);
+	var senatorString = senator.query.results.response.contributors.cand_name;
 	var senatorName = getSenatorName(senatorString);
 	var senatorParty = getSenatorParty(senatorString);
 	

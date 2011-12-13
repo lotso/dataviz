@@ -97,7 +97,7 @@ text.labels, text.nameLabels, text.valueLabels {
   fill: black;
 }
 
-cardList, .addCard {
+.cardList, .addCard {
 	list-style: none;
 	border: 1px solid gray;
 	background-color: white;
@@ -114,6 +114,10 @@ cardList, .addCard {
 
 .Republican, .Democrat {
 	font-size: 14px;
+}
+
+.toggleCard {
+	display: none;
 }
 
 .senName {
