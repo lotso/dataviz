@@ -1,31 +1,106 @@
 var senators = new Array();
 
 function addSenatorsToSideBar() {
+	$("#senatorsList").append("<li class = \"senatorBar label\" id=\"senLabel\">Senators</li>");
 	for(var i = 0; i < senatorsObj.Senators.length; i++){
 		$("#senatorsList").append("<li onClick=\"addCard(this)\" class=\"senatorBar\" id=\"sl" + senatorsObj.Senators[i].ID + "\">" + senatorsObj.Senators[i].Name + "</li>");
 	}
 }
 
+function viewMoreIndustry(item) {
+	var id = $(item).attr("id");
+	console.log(financeData.Finance);
+	console.log($(item).attr("id").substring(1));
+	var industry = $(item).attr("id").substring(1);
+	if(industry == "Finance") {
+		$("#scFinance").hide();
+		drawStackedBarGraph("cardChart", "finance", "cfinance", financeData.Finance, 710, 600);
+	}else if (industry == "Lawyers") {
+		$("#scLawyers").hide();
+		drawStackedBarGraph("cardChart", "lawyers", "clawyers", financeData.LawyersLobbyists, 710, 600);
+	}else if (industry == "Health") {
+		$("#scFinance").hide();
+		drawStackedBarGraph("cardChart", "health", "chealth", financeData.Health, 710, 600);
+	}else if (industry == "Others") {
+		$("#scFinance").hide();
+		drawStackedBarGraph("cardChart", "others", "cothers", financeData.Others, 710, 600);
+	}
+	//drawStackedBarGraph(className, bigID, chartID, rawJson, width, height)
+	
+	// console.log(id);
+	// var senator = senators[id];
+	// var senatorID = id;
+	// console.log(senator);
+	// var senatorString = senator.query.results.response.contributors.cand_name;
+	// var senatorName = getSenatorName(senatorString);
+	// var senatorParty = getSenatorParty(senatorString);
+	// var arrLength = getArrayLength(senator);
+	// 
+	// var totals = new Array(arrLength);
+	// var organizations = new Array(arrLength);
+	// 
+	// console.log(senator);
+	// for(var i = 0; i < arrLength; i++) {
+	// 	totals[i] = parseFloat(senator.query.results.response.contributors.contributor[i].total);
+	// 	organizations[i] = senator.query.results.response.contributors.contributor[i].org_name;
+	// }
+	// var openSecretsUrl = "http://www.opensecrets.org/politicians/summary.php?cid=" + senatorID + "&cycle=2010";
+	// //$("<div class=\"bigView\" id=\"big" + id + "\"><div class=\"nameContainer\"><div class=\"senName Big\">" + senatorName + "</div> <div class=\"" + senatorParty + " Medium\">" + senatorParty + "</div> <a class=\"openSecretsLink\" target=\"_blank\" href=\"" + openSecretsUrl + "\"> View More from OpenSecrets.org </a> </div>" +  "<input type=\"button\" class=\"removeBig\" onClick=\"removeBig(this)\" value=\"X\" id=\"bv" + id + "\">" + "<input type=\"button\" class=\"toggleBigCard\" onClick=\"toggleBigCard(this)\" value=\"toggleBig\" id=\"tb" + senatorID + "\">" + "</div>").appendTo("body");
+	// 
+	// $("#sen" + senatorID).addClass("Expanded");
+	// $("#sc" + senatorID).remove();
+	// $("#" + senatorID).addClass("textExpanded");
+	// 
+	// $("#" + senatorID).fadeOut('fast', function(){
+	// 	$("#" + senatorID).val("view less");
+	// 	$("#" + senatorID).fadeIn('fast', function(){
+	// 		//$("#" + senatorID).val("view less");
+	// 	});
+	// });
+	// 
+	// 
+	// //$( "#" + senatorID ).bind( "click", viewLess )
+	// // $("#" + senatorID).click(function() {
+	// // 	viewLess(this);
+	// // });
+	// drawBarGraph("cardChart", "sen" + senatorID, "sc" + senatorID, totals, organizations, 10, 355, 400);
+	// //drawBarGraph("bigChart", "sen" + senatorID, "bc" + senatorID , totals, organizations, 10 , 500, 400);
+	// 
+	// $("#" + senatorID).removeAttr("onclick", null);
+	// $("#" + senatorID).click(function(){
+	// 	console.log("why");
+	// 	viewLess(this);
+	// });
+}
+
 function addFinanceCard(item) {
-	
-	
 	
 	if($(item).attr("id") == "ciFinance") {
 		console.log("finance");
-		$("<li id=\"finance\" class=\"cardList\"><div class=\"indName\">Finance Industry</div> <input type=\"button\" class=\"remove\" onClick=\"remove(this)\" value=\"x\" id=\"remFinance\">" + "<input type=\"button\" class=\"viewMore\" onClick=\"viewMore(this)\" value=\"view more\" id=\"vFinance\">" + "</li>").appendTo("#cardList");
+		$("<li id=\"finance\" class=\"cardList\"><div class=\"indName\">Finance Industry</div> <input type=\"button\" class=\"remove Ind\" onClick=\"removeInd(this)\" value=\"x\" id=\"remfinance\">" + "<input type=\"button\" class=\"viewMore indText\" onClick=\"viewMoreIndustry(this)\" value=\"view more\" id=\"vFinance\">" + "</li>").appendTo("#cardList");
 		//updateGraph("sen"+ senID, senator, senatorID);
-    drawPieChart("cardChart", "finance", "scFinance", financeData.Finance, 355, 200);
+    drawPieChart("pieChart", "finance", "scFinance", financeData.Finance, 355, 200);
 	}else if ($(item).attr("id") == "ciHealth") {
 		console.log("health");
+		$("<li id=\"health\" class=\"cardList\"><div class=\"indName\">Health Industry</div> <input type=\"button\" class=\"remove Ind\" onClick=\"removeInd(this)\" value=\"x\" id=\"remhealth\">" + "<input type=\"button\" class=\"viewMore indText\" onClick=\"viewMoreIndustry(this)\" value=\"view more\" id=\"vHealth\">" + "</li>").appendTo("#cardList");
+		//updateGraph("sen"+ senID, senator, senatorID);
+    drawPieChart("pieChart", "health", "scHealth", financeData.Health, 355, 200);
 	}else if ($(item).attr("id") == "ciLawyersLobbyists") {
 		console.log("lawyers");
+		$("<li id=\"lawyers\" class=\"cardList\"><div class=\"indName\">Lawyers & Lobbyists Industry</div> <input type=\"button\" class=\"remove Ind\" onClick=\"removeInd(this)\" value=\"x\" id=\"remlawyers\">" + "<input type=\"button\" class=\"viewMore indText\" onClick=\"viewMoreIndustry(this)\" value=\"view more\" id=\"vLawyers\">" + "</li>").appendTo("#cardList");
+		//updateGraph("sen"+ senID, senator, senatorID);
+    drawPieChart("pieChart", "lawyers", "scLawyers", financeData.LawyersLobbyists, 355, 200);
 	}else if ($(item).attr("id") == "ciOther") {
 		console.log("other");
+		$("<li id=\"other\" class=\"cardList\"><div class=\"indName\">Other Industries</div> <input type=\"button\" class=\"remove Ind\" onClick=\"removeInd(this)\" value=\"x\" id=\"remother\">" + "<input type=\"button\" class=\"viewMore indText\" onClick=\"viewMoreIndustry(this)\" value=\"view more\" id=\"vOthers\">" + "</li>").appendTo("#cardList");
+		//updateGraph("sen"+ senID, senator, senatorID);
+    drawPieChart("pieChart", "other", "scOthers", financeData.Other, 355, 200);
 	}
 }
 
 function addIndustriesToSideBar() {
 	console.log(financeData);
+	$("#senatorsList").append("<li class = \"senatorBar label\">Industries</li>");
 	$("#senatorsList").append("<li onClick=\"addFinanceCard(this)\" class=\"senatorBar\" id=\"ciFinance\">Finance Industry</li>");
 	$("#senatorsList").append("<li onClick=\"addFinanceCard(this)\" class=\"senatorBar\" id=\"ciHealth\">Health Industry</li>");
 	$("#senatorsList").append("<li onClick=\"addFinanceCard(this)\" class=\"senatorBar\" id=\"ciLawyersLobbyists\">Lawyers/Lobbyists Industry</li>");
@@ -100,6 +175,11 @@ function getSenatorParty(senatorString) {
 	return "";
 }
 
+
+function removeInd(item) {
+	console.log($(item).attr("id").substring(3));
+	$("#" + $(item).attr("id").substring(3)).remove();
+}
 
 
 function remove(item) {

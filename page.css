@@ -101,6 +101,8 @@ text.labels, text.nameLabels, text.valueLabels {
 	color: #666;
 }
 
+
+
 .openSecretsLink {
 	position: relative;
 	margin-left: -134px;
@@ -111,6 +113,10 @@ text.labels, text.nameLabels, text.valueLabels {
 .senateView {
 	text-align: center;
 	margin-top: 10px;
+}
+
+.indText {
+	bottom: -245px;
 }
 
 .senateView span {
@@ -149,6 +155,10 @@ text.labels, text.nameLabels, text.valueLabels {
 	float: left;
 }
 
+.pieChart {
+	margin-left: 77px;
+}
+
 .toggleBigCard {
 	display: none;
 }
@@ -166,9 +176,13 @@ text.labels, text.nameLabels, text.valueLabels {
 	display: none;
 }
 
-.senName {
+.senName, .indName {
 	font-size: 24px;
 	margin-top: 2px;
+}
+
+.indName {
+	text-indent: 5px;
 }
 
 .Republican {
@@ -244,6 +258,10 @@ text.labels, text.nameLabels, text.valueLabels {
 	background-color: #eee;
 }
 
+#senLabel {
+	padding-top: 16px;
+}
+
 .sideBar {
 	width: 150px;
 	border-right: 2px solid gray;
@@ -261,4 +279,15 @@ text.labels, text.nameLabels, text.valueLabels {
 
 #senatorsList {
 	margin-left: -40px;
+	padding-top: 16px;
+}
+
+.label {
+	font-weight: bold;
+	font-size: 14px;
+	padding-bottom: 6px;
+}
+
+.Ind {
+	top: -30px;
 }
