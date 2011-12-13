@@ -2,6 +2,11 @@ var chart, x, y;
 var chartWidth = 800;
 var chartHeight = 600;
 var barWidth = 25;
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(?:\d{3})+(?!\d))/g, ",");
+}
+
 function drawPieChart(className, bigID, chartID, rawJson, width, height)
 {
     //Pass data as the top level arrays in the large JSon shit I sent
@@ -45,18 +50,36 @@ function drawPieChart(className, bigID, chartID, rawJson, width, height)
         .enter().append("svg:g").attr("class", "slice");
         
     arcs.append("svg:path")
-        .attr("fill", function(d,i) {return color(i); })
+        .attr("fill", function(d,i) {if(i == 0) return "#3D6AFF"; else return "#FC6060";})
         .attr("d", arc);
         
     arcs.append("svg:text")
+        .attr("fill", "white")
         .attr("transform", function(d)
             {
                 d.innerRadius = 0;
                 d.outerRadius = r;
-                return "translate(" + arc.centroid(d) + ")";
+                var center = arc.centroid(d);
+                var x = center[0];
+                var y = center[1]-6;
+                return "translate(" + x+","+ y + ")";
             })
         .attr("text-anchor", "middle")
-        .text(function(d, i) { return data[i].label; });
+        .text(function(d, i) { return data[i].label;})
+        
+    arcs.append("svg:text")
+        .attr("fill", "white")
+        .attr("transform", function(d)
+            {
+                d.innerRadius = 0;
+                d.outerRadius = r;
+                var center = arc.centroid(d);
+                var x = center[0];
+                var y = center[1]+6;
+                return "translate(" + x + "," + y + ")";
+            })
+        .attr("text-anchor", "middle")
+        .text(function(d, i) { return "$" + numberWithCommas(data[i].value);})
 }
 
 //function drawBig(
