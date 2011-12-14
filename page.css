@@ -80,6 +80,12 @@ text.labels, text.nameLabels, text.valueLabels {
 .otherView {
 	text-indent: 6px;
 	margin-top: 5px;
+	cursor: pointer;
+	color: #8A8A8A;
+}
+
+.otherView:hover {
+	color: #666;
 }
 
 .viewMore:hover {

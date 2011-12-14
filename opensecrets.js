@@ -157,7 +157,7 @@ function addIndustriesToSideBar() {
 }
 
 function createCandContribUrl(senId) {
-	var url = "http://www.opensecrets.org/api/?method=candContrib&cid=" + senId + "&cycle=2010&apikey=1f034a0ada9447c9f2139a3be4514cf9";
+	var url = "http://www.opensecrets.org/api/?method=candContrib&cid=" + senId + "&cycle=2010&apikey=d47582dc4544d2874b64ce7407440c64";
 	return url;
 }
 
@@ -215,7 +215,7 @@ function loadCard(item) {
 	var senId = item.substring(2);
 	var getUrl = createCandContribUrl(senId);
 	console.log(getUrl);
-	//getUrl = "http://www.opensecrets.org/api/?method=candIndustry&cid=N00000019&cycle=2006&apikey=b2f04b41bc14f3ba04c32a3959bcddeb"
+	//getUrl = "http://www.opensecrets.org/api/?method=candIndustry&cid=N00000019&cycle=2006&apikey=d47582dc4544d2874b64ce7407440c64"
 	var senObj;
 	
 	getCrossDomainJson(getUrl, function(data) {
@@ -227,7 +227,7 @@ function addCard(item) {
 	var senId = $(item).attr("id").substring(2);
 	var getUrl = createCandContribUrl(senId);
 	console.log(getUrl);
-	//getUrl = "http://www.opensecrets.org/api/?method=candIndustry&cid=N00000019&cycle=2006&apikey=b2f04b41bc14f3ba04c32a3959bcddeb"
+	//getUrl = "http://www.opensecrets.org/api/?method=candIndustry&cid=N00000019&cycle=2006&apikey=d47582dc4544d2874b64ce7407440c64"
 	var senObj;
 	
 	getCrossDomainJson(getUrl, function(data) {
