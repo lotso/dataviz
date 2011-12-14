@@ -161,6 +161,68 @@ function createCandContribUrl(senId) {
 	return url;
 }
 
+loadCard("slN00003389");
+loadCard("slN00007364");
+addFinanceCard("ciFinance");
+
+
+function addFinanceCard(item) {
+	var added = false;
+	if(item == "ciFinance") {
+		if($("#finance").length){
+			added = true;
+		}
+	}else if (item == "ciHealth") {
+		if($("#health").length){
+			added = true;
+		}
+	}else if (item== "ciLawyersLobbyists") {
+		if($("#lawyers").length){
+			added = true;
+		}
+	}else if (item == "ciOther") {
+		if($("#other").length){
+			added = true;
+		}
+	}
+	if(!added) {
+		if(item == "ciFinance") {
+			console.log("finance");
+			$("<li id=\"finance\" class=\"cardList\"><div class=\"indName\">Finance Industry</div> <input type=\"button\" class=\"remove Ind\" onClick=\"removeInd(this)\" value=\"x\" id=\"remfinance\">" + "<input type=\"button\" class=\"viewMore indText\" onClick=\"viewMoreIndustry(this)\" value=\"view more\" id=\"vFinance\">" + "</li>").appendTo("#cardList");
+			//updateGraph("sen"+ senID, senator, senatorID);
+	    drawPieChart("pieChart", "finance", "scFinance", financeData.Finance, 355, 200);
+		}else if (item == "ciHealth") {
+			console.log("health");
+			$("<li id=\"health\" class=\"cardList\"><div class=\"indName\">Health Industry</div> <input type=\"button\" class=\"remove Ind\" onClick=\"removeInd(this)\" value=\"x\" id=\"remhealth\">" + "<input type=\"button\" class=\"viewMore indText\" onClick=\"viewMoreIndustry(this)\" value=\"view more\" id=\"vHealth\">" + "</li>").appendTo("#cardList");
+			//updateGraph("sen"+ senID, senator, senatorID);
+	    drawPieChart("pieChart", "health", "scHealth", financeData.Health, 355, 200);
+		}else if (item == "ciLawyersLobbyists") {
+			console.log("lawyers");
+			$("<li id=\"lawyers\" class=\"cardList\"><div class=\"indName\">Lawyers & Lobbyists Industry</div> <input type=\"button\" class=\"remove Ind\" onClick=\"removeInd(this)\" value=\"x\" id=\"remlawyers\">" + "<input type=\"button\" class=\"viewMore indText\" onClick=\"viewMoreIndustry(this)\" value=\"view more\" id=\"vLawyers\">" + "</li>").appendTo("#cardList");
+			//updateGraph("sen"+ senID, senator, senatorID);
+	    drawPieChart("pieChart", "lawyers", "scLawyers", financeData.LawyersLobbyists, 355, 200);
+		}else if (item == "ciOther") {
+			console.log("other");
+			$("<li id=\"other\" class=\"cardList\"><div class=\"indName\">Other Industries</div> <input type=\"button\" class=\"remove Ind\" onClick=\"removeInd(this)\" value=\"x\" id=\"remother\">" + "<input type=\"button\" class=\"viewMore indText\" onClick=\"viewMoreIndustry(this)\" value=\"view more\" id=\"vOthers\">" + "</li>").appendTo("#cardList");
+			//updateGraph("sen"+ senID, senator, senatorID);
+	    drawPieChart("pieChart", "other", "scOthers", financeData.Other, 355, 200);
+		}
+	}
+	
+}
+
+function loadCard(item) {
+	var senId = item.substring(2);
+	var getUrl = createCandContribUrl(senId);
+	console.log(getUrl);
+	//getUrl = "http://www.opensecrets.org/api/?method=candIndustry&cid=N00000019&cycle=2006&apikey=b2f04b41bc14f3ba04c32a3959bcddeb"
+	var senObj;
+	
+	getCrossDomainJson(getUrl, function(data) {
+		createCard(data, senId);
+	});
+}
+
 function addCard(item) {
 	var senId = $(item).attr("id").substring(2);
 	var getUrl = createCandContribUrl(senId);
