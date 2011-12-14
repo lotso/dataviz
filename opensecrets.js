@@ -163,10 +163,10 @@ function createCandContribUrl(senId) {
 
 loadCard("slN00003389");
 loadCard("slN00007364");
-addFinanceCard("ciFinance");
+addFinanceCard2("ciFinance");
 
 
-function addFinanceCard(item) {
+function addFinanceCard2(item) {
 	var added = false;
 	if(item == "ciFinance") {
 		if($("#finance").length){
