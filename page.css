@@ -314,3 +314,7 @@ text.labels, text.nameLabels, text.valueLabels {
 	bottom: -628px;
 	left: 314px;
 }
+
+.hidden {
+	display: none;
+}
